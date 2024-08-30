@@ -56,3 +56,10 @@
     border-radius: 50%;
     padding: 2px;
 }
+
+@media (max-width:1050px) {
+    .em-text{
+        max-width: 100%;
+        font-size: 14px;
+    }
+}
