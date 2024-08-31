@@ -6,6 +6,7 @@ import Cart from "./pages/Cart/Cart";
 import Placeorder from "./pages/Placeorder/Placeorder";
 import Footer from "./components/Footer/Footer";
 import Login from "./components/Login/Login";
+
 const App = () => {
   
   const [showLogin, setShowLogin] = useState(false)
