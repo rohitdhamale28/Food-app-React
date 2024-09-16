@@ -1,6 +1,7 @@
  import express from "express";
  import cors from "cors";
- import { connetDB } from "./config/db";
+ import { connetDB } from "./config/db.js";
+import foodRouter from "./routes/foodroute.js";
 
  const app = express();
  const port =4000;
@@ -9,7 +10,10 @@
  app.use(cors())
 
 //  DB connection
-// connetDB();
+connetDB();
+
+// api endpoints
+app.use("/api/food", foodRouter);
 
  app.get("/", (req,res)=>{
     res.send("API Working");
