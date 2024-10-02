@@ -9,6 +9,6 @@ export const assets = {
    profile_icon,
    add_icon,
    order_icon,
-    bag_icon,
+    order_icon,
     parcel_icon
 }
