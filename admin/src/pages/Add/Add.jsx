@@ -7,7 +7,7 @@ import { toast, useToast } from "react-toastify";
 
 const Add = () => {
 
-  const url ="http://localhost:4000"
+  const url ="http://localhost:5000"
   const [image,setImage] = useState(false); 
   const [data, setData] = useState({
     name:"",
@@ -37,7 +37,7 @@ const onSubmitHandler = async () => {
           console.log(pair[0], pair[1]);
         }
   try {
-    const response = await axios.post('http://localhost:4000/api/food/add', formData, {
+    const response = await axios.post('http://localhost:5000/api/food/add', formData, {
       headers: {
         'Content-Type': 'multipart/form-data', // This ensures the correct headers are sent
       },

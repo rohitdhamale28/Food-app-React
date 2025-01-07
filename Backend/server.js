@@ -4,14 +4,17 @@
 import foodRouter from "./routes/foodroute.js";
 import mongoose from "mongoose";
 import multer from "multer";
+import { deserialize } from 'v8';
 
+import fs from 'fs';
 
 import { foodModel } from './models/foodModel.js';
+import userRouter from "./routes/userRoute.js";
 
 
 
  const app = express();
- const port =4000;
+ const port =5000;
 
  app.use(express.json())
  app.use(cors())
@@ -44,11 +47,15 @@ const upload = multer({storage:storage});
 
 // api endpoints
 // app.use("/api/food", foodRouter);
-app.use("/images", express.static('uploads'));
+ app.use ("/api/user", userRouter);
 
 
 app.post("/api/food/add",upload.single('image'),async(req,res)=>{
+  if (!req.file) {
+    return res.status(400).send('No file uploaded.');
+}
  let image_filename =`${req.file.filename}`;
+ console.log('File uploaded successfully:', image_filename);
 console.log(req.body); 
 console.log(req.file);
  const food = new foodModel({
@@ -60,6 +67,7 @@ console.log(req.file);
  })
  try{
     await food.save();
+    // res.redirect("http://localhost:5173/add")
     res.json({success:true, message: "Food Added"} );
    //  if(success){
    //    console.log("success");
@@ -69,6 +77,7 @@ console.log(req.file);
     res.json({success:false, message: "Error"})
  }
 });
+app.use("/images", express.static('uploads'));
 
 app.get("/api/food/list",async(req,res)=>{
   try{
@@ -81,6 +90,22 @@ res.json( {success:true , data :foods})
   }
  
   });
+
+  app.post("/api/food/remove",async (req,res) =>{
+    try {
+      console.log(req.body.id);
+      const food = await foodModel.findById(req.body.id)
+      fs.unlink(`uploads/${food.image}`,()=>{})
+      await foodModel.findByIdAndDelete(req.body.id)
+      res.json( {success:true , message:"food removed"})
+    }catch(err){
+      console.log(err);
+      res.json( {success:false, message:"Error"})
+   
+    }
+  });
+
+
 
  app.get("/", (req,res)=>{
     res.send("API Working");

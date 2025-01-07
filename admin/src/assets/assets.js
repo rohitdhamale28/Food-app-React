@@ -3,6 +3,8 @@ import add_icon from './add_icon_white.png'
 import profile_icon from './profile_icon.png'
 import order_icon from './bag_icon.png'
 import parcel_icon from './parcel_icon.png'
+import upload_area from './upload_area.png'
+
 
 export const assets = {
     logo,
@@ -10,5 +12,6 @@ export const assets = {
    add_icon,
    order_icon,
     order_icon,
-    parcel_icon
+    parcel_icon,
+    upload_area
 }
