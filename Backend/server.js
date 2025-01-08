@@ -48,7 +48,7 @@ const upload = multer({storage:storage});
 
 // api endpoints
 // app.use("/api/food", foodRouter);
- app.use ("/api/user", userRouter);
+ app.use("/api/user", userRouter);
 
 
 app.post("/api/food/add",upload.single('image'),async(req,res)=>{
