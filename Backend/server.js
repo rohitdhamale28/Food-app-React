@@ -10,6 +10,7 @@ import fs from 'fs';
 
 import { foodModel } from './models/foodModel.js';
 import userRouter from "./routes/userRoute.js";
+import 'dotenv/config.js'
 
 
 
