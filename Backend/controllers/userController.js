@@ -1,9 +1,9 @@
-import userModel from "../models/user";
+import userModel from "../models/user.js";
 import jwt from "jsonwebtoken"
 import bcryt from "bcrypt"
 import validator from "validator"
 
-const loginUser = async (req,res)=>{
+export const loginUser = async (req,res)=>{
     const {email,password}= req.body;
     try{
         const user = await userModel.findOne({email});
@@ -32,7 +32,7 @@ const createToken = (id)=>{
     return jwt.sign({id},process.env.JWT_SCERET);
 }
 
-const registerUser = async(req,res)=>{
+export const registerUser = async(req,res)=>{
 const {name,password,email} = req.body;
 try{
     const exists = await userModel.findOne({email});
@@ -63,4 +63,4 @@ try{
 }
 }
 
-export default {loginUser,registerUser}
+// export default {loginUser,registerUser}
