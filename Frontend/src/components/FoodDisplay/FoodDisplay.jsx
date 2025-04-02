@@ -5,7 +5,7 @@ import { StoreContext } from '../../context/StoreContext.jsx';
 
 const FoodDisplay = ({category}) => {
     const {food_list}= useContext(StoreContext);
-
+console.log(category);  
   return (
     <div className='food-dispaly' id='food-display'>
       <h2>Top Dishes Near You</h2>

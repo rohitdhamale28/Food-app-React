@@ -5,11 +5,11 @@ import { toast } from 'react-toastify';
 
 const List = () => {
 
-  const url= "http://localhost:5000";
+  const url= "http://localhost:8000";
   const [list, setList]= useState([]);
 
 const fetchList = async () => {
-  const response = await axios.get(`http://localhost:5000/api/food/list`);
+  const response = await axios.get(`http://localhost:8000/api/food/list`);
 //  console.log(response.data);
   if(response.data.success){
     setList(response.data.data);
@@ -21,7 +21,7 @@ const fetchList = async () => {
 
 const removeFood = async (foodId) => {
   console.log(foodId );
-  const response = await axios.post(`http://localhost:5000/api/food/remove`, {id:foodId});
+  const response = await axios.post(`http://localhost:8000/api/food/remove`, {id:foodId});
   await fetchList();
   if(response.data.success){
     toast.success(response.data.message)

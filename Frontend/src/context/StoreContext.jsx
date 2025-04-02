@@ -1,10 +1,11 @@
 import { createContext, useEffect, useState } from "react";
 import { food_list } from "../assets/assets";
 export const StoreContext = createContext(null);
+import axios from "axios";
 
 
 const StoreContextProvider = (props) => {
-    const url = "http://localhost:5000";
+    const url = "http://localhost:8000";
     const [cartItems, setCartItems] = useState({});
     const [token, setToken] = useState("");
     const [food_list, setFoodList]= useState([])
@@ -34,6 +35,7 @@ const StoreContextProvider = (props) => {
 
     const fetchFoodList = async()=>{
         const response = await axios.get(url+"/api/food/list");
+        // console.log(response.data);
         setFoodList(response.data.data)
         
     }
