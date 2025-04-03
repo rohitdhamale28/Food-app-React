@@ -10,6 +10,8 @@ import fs from 'fs';
 
 import { foodModel } from './models/foodModel.js';
 import userRouter from "./routes/userRoute.js";
+import listings from "./routes/listing.js";
+
 import 'dotenv/config.js'
 
 
@@ -49,7 +51,8 @@ const upload = multer({storage:storage});
 // api endpoints
 // app.use("/api/food", foodRouter);
  app.use("/api/user", userRouter);
-
+// all the listings route are stored in this file
+app.use("/listings",listings);
 
 app.post("/api/food/add",upload.single('image'),async(req,res)=>{
   if (!req.file) {
