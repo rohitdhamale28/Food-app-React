@@ -26,7 +26,7 @@ const upload = multer({ storage });
 
 const listingRouter = express.Router();
 
-listingRouter.get("/list", listListings);
+listingRouter.get("/", listListings);
 listingRouter.post("/add", upload.single("listing[image]"), addListing);
 listingRouter.get("/:id", showListing);
 listingRouter.put("/:id", updateListing);

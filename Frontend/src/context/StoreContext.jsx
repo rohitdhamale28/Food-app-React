@@ -9,6 +9,8 @@ const StoreContextProvider = (props) => {
     const [cartItems, setCartItems] = useState({});
     const [token, setToken] = useState("");
     const [food_list, setFoodList]= useState([])
+    const [restau_list, setRestauList]= useState([])
+
     const addToCart = (itemId) =>{
         if(!cartItems[itemId]){
             setCartItems((prev)=>({...prev,[itemId]:1}))
@@ -51,6 +53,24 @@ const StoreContextProvider = (props) => {
         localData();
     },[])
 
+    const fetchRestauList = async()=>{
+        const response = await axios.get(url+"/api/listings");
+        // console.log(response.data);
+        setRestauList(response.data.data)
+        
+    }
+
+    useEffect(()=>{
+        
+        async function localData() {
+            await fetchRestauList();
+            if(localStorage.getItem("token")){
+                setToken(localStorage.getItem("token"))
+            }
+        }
+        localData();
+    },[])
+
     const removeFromCart =(itemId)=> {
         setCartItems((prev)=>({...prev,[itemId]:prev[itemId]-1}))
     }
@@ -62,7 +82,7 @@ const StoreContextProvider = (props) => {
     })
 
     const contextValue ={
-        food_list,url,token,setToken, cartItems,setCartItems,addToCart,removeFromCart,getTotal
+       restau_list, food_list,url,token,setToken, cartItems,setCartItems,addToCart,removeFromCart,getTotal
     }
     return(
         <StoreContext.Provider value={contextValue}>

@@ -74,7 +74,7 @@ const updateListing = async (req, res) => {
 // DELETE Route
 const deleteListing = async (req, res) => {
     try {
-        const { id } = req.params;
+        const { id } = req.body._id;
         const listing = await Listing.findById(id);
         
         if (!listing) {
